@@ -1,0 +1,23 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "description": "MERN shopping cart app",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samqchau/ProShop.git"
+  },
+  "author": "Sam Chau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samqchau/ProShop/issues"
+  },
+  "homepage": "https://github.com/samqchau/ProShop#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
