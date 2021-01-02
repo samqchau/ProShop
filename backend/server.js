@@ -5,11 +5,14 @@ import colors from 'colors';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 import productRouter from './routes/productRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(express.json());
 
 //routes
 app.get('/', (req, res) => {
@@ -18,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRouter);
+app.use('/api/users', userRouter);
 
 //error handlers
 app.use(notFound);
