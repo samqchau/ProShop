@@ -18,7 +18,7 @@ const Loader = () => {
             top: '50%',
           }}
         >
-          <span class='sr-only'>Loading...</span>
+          <span className='sr-only'>Loading...</span>
         </Spinner>
       </Row>
     </Container>
