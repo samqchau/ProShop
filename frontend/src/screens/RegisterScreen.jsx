@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 
-import { register } from '../actions/userActions';
+import { register, registerReset } from '../actions/userActions';
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -26,6 +26,12 @@ const RegisterScreen = ({ location, history }) => {
       history.push(redirect);
     }
   }, [history, userInfo, redirect]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(registerReset());
+    };
+  }, [dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();

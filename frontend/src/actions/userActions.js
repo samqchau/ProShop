@@ -7,6 +7,7 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  USER_REGISTER_RESET,
 } from '../constants/userConstants';
 
 export const login = (email, password) => async (dispatch, getState) => {
@@ -74,4 +75,8 @@ export const register = (name, email, password) => async (
           : error.message,
     });
   }
+};
+
+export const registerReset = () => async (dispatch, getState) => {
+  dispatch({ type: USER_REGISTER_RESET });
 };
