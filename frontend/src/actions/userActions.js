@@ -46,6 +46,11 @@ export const login = (email, password) => async (dispatch, getState) => {
   }
 };
 
+export const updateLoginInfo = (user) => (dispatch, getState) => {
+  dispatch({ type: USER_LOGIN_SUCCESS, payload: user });
+  localStorage.setItem('userInfo', JSON.stringify(user));
+};
+
 export const logout = () => async (dispatch, getState) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });

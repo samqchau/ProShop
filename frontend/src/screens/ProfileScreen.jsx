@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-import { getUserDetails, updateUserProfile } from '../actions/userActions';
+import {
+  getUserDetails,
+  updateUserProfile,
+  updateLoginInfo,
+} from '../actions/userActions';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -31,7 +35,7 @@ const ProfileScreen = ({ location, history }) => {
       if (!user.name) {
         dispatch(getUserDetails('profile'));
       } else {
-        setName(user.name);
+        setName(userInfo.name);
         setEmail(user.email);
       }
     }
@@ -43,6 +47,15 @@ const ProfileScreen = ({ location, history }) => {
       setMessage('Passwords do not match');
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(
+        updateLoginInfo({
+          id: user._id,
+          name,
+          email,
+          isAdmin: userInfo.isAdmin,
+          token: userInfo.token,
+        })
+      );
     }
   };
 
