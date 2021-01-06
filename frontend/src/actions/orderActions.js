@@ -52,11 +52,9 @@ export const getOrderDetails = (orderId) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = axios.get(`/api/orders/${orderId}`, config);
+    const { data } = await axios.get(`/api/orders/${orderId}`, config);
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
-    if (data) {
-    }
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
