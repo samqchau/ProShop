@@ -16,12 +16,14 @@ export const orderCreateReducer = (state = {}, action) => {
     case ORDER_CREATE_FAIL:
       return { loading: false, error: action.payload };
     default:
-      return state;
+      return { ...state };
   }
 };
 
 export const orderDetailsReducer = (
-  state = { order: { shippingAddress: {}, orderItems: [] } },
+  state = {
+    order: { shippingAddress: {}, orderItems: [], user: { name: '' } },
+  },
   action
 ) => {
   switch (action.type) {
@@ -32,6 +34,6 @@ export const orderDetailsReducer = (
     case ORDER_DETAILS_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
-      return state;
+      return { ...state };
   }
 };
