@@ -9,6 +9,7 @@ const TestScreen = () => {
   useEffect(() => {
     console.log(order);
     dispatch(getOrderDetails('5ff58846ae2db852e443a8d5'));
+    // eslint-disable-next-line
   }, []);
 
   const handleClick = () => {
