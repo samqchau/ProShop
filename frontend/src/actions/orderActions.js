@@ -3,13 +3,13 @@ import {
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAIL,
+  ORDER_CREATE_RESET,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
   ORDER_DETAILS_FAIL,
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
-  ORDER_PAY_RESET,
   ORDER_LIST_FOR_USER_REQUEST,
   ORDER_LIST_FOR_USER_SUCCESS,
   ORDER_LIST_FOR_USER_FAIL,
@@ -33,6 +33,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const { data } = await axios.post('/api/orders', order, config);
 
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
+    dispatch({ type: ORDER_CREATE_RESET });
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,

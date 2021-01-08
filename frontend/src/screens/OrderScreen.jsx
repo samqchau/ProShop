@@ -1,7 +1,7 @@
 //libraries
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 //components
