@@ -79,7 +79,7 @@ export const payOrder = (orderId, paymentResult) => async (
 
     const {
       userLogin: { userInfo },
-    } = getState().userLogin;
+    } = getState();
 
     const config = {
       headers: {
