@@ -16,7 +16,10 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
 } from '../constants/userConstants';
-import { ORDER_LIST_FOR_USER_RESET } from '../constants/orderConstants';
+import {
+  ORDER_DETAILS_RESET,
+  ORDER_LIST_FOR_USER_RESET,
+} from '../constants/orderConstants';
 
 export const login = (email, password) => async (dispatch, getState) => {
   try {
@@ -57,6 +60,7 @@ export const logout = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_FOR_USER_RESET });
+  dispatch({ type: ORDER_DETAILS_RESET });
 };
 
 export const register = (name, email, password) => async (
