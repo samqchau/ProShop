@@ -109,7 +109,7 @@ export const payOrder = (orderId, paymentResult) => async (
   }
 };
 
-export const listOrdersForUser = (userId) => async (dispatch, getState) => {
+export const listOrdersForUser = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_LIST_FOR_USER_REQUEST });
 
