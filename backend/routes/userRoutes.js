@@ -4,11 +4,13 @@ import {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  getAllUsers,
 } from '../controllers/userController.js';
-import { protect } from '../middleware/authMiddleware.js';
+import { protect, adminOnly } from '../middleware/authMiddleware.js';
 
 const userRouter = express.Router();
 // '/api/users'
+userRouter.get('/', protect, adminOnly, getAllUsers);
 userRouter.post('/', registerUser);
 userRouter.post('/login', authUser);
 userRouter.get('/profile', protect, getUserProfile);
