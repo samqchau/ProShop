@@ -7,7 +7,8 @@ import Loader from '../components/Loader';
 import GoBackButton from '../components/GoBackButton';
 import FormContainer from '../components/FormContainer';
 
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, adminUpdateUser } from '../actions/userActions';
+import { USER_ADMIN_UPDATE_RESET } from '../constants/userConstants';
 
 const UserEditScreen = ({ match, history }) => {
   const userId = match.params.id;
@@ -19,18 +20,37 @@ const UserEditScreen = ({ match, history }) => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  const userAdminUpdate = useSelector((state) => state.userAdminUpdate);
+  const {
+    success: adminUpdateSuccess,
+    error: adminUpdateError,
+    loading: adminUpdateLoading,
+  } = userAdminUpdate;
+
   useEffect(() => {
-    if (!user.name || user._id !== userId) {
-      dispatch(getUserDetails(userId));
+    if (adminUpdateSuccess) {
+      dispatch({ type: USER_ADMIN_UPDATE_RESET });
+      history.push('/admin/userlist');
     } else {
-      setName(user.name);
-      setEmail(user.email);
-      setIsAdmin(user.isAdmin);
+      if (!user.name || user._id !== userId) {
+        dispatch(getUserDetails(userId));
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setIsAdmin(user.isAdmin);
+      }
     }
-  }, [user, dispatch, userId]);
+  }, [user, dispatch, userId, adminUpdateSuccess, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const updatedUser = {
+      _id: userId,
+      name,
+      email,
+      isAdmin,
+    };
+    dispatch(adminUpdateUser(updatedUser));
   };
 
   const emailChangeHandler = (e) => {
@@ -50,6 +70,10 @@ const UserEditScreen = ({ match, history }) => {
       <GoBackButton history={history} />
       <FormContainer>
         <h1>Edit User</h1>
+        {adminUpdateLoading && <Loader />}
+        {adminUpdateError && (
+          <Message variant='danger'>{adminUpdateError}</Message>
+        )}
         {loading ? (
           <Loader />
         ) : error ? (
