@@ -66,6 +66,7 @@ const OrderScreen = ({ match }) => {
   ) : (
     <>
       <h1>Order {order._id}</h1>
+      {errorPay && <Message variant='danger'>{errorPay}</Message>}
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>

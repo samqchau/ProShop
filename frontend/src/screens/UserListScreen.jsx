@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,7 +22,7 @@ const UserListScreen = ({ history }) => {
   const {
     success: userDeleteSuccess,
     error: userDeleteError,
-    loading: userDeleteLoading,
+    //loading: userDeleteLoading,
   } = userDelete;
 
   useEffect(() => {
@@ -32,7 +31,6 @@ const UserListScreen = ({ history }) => {
     } else {
       history.push('/login');
     }
-
     return () => {
       dispatch({ type: USER_DELETE_RESET });
     };
@@ -91,7 +89,7 @@ const UserListScreen = ({ history }) => {
                   </td>
                   <td>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                      <LinkContainer to={`/user/${user._id}/edit`}>
+                      <LinkContainer to={`/admin/user/${user._id}/edit`}>
                         <Button variant='info' className='btn-sm mr-2'>
                           <i className='fas fa-edit' />
                         </Button>

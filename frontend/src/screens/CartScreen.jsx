@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap';
 
 import Message from '../components/Message';
+import GoBackButton from '../components/GoBackButton';
 import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 
@@ -43,14 +44,7 @@ const CartScreen = ({ match, location, history }) => {
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <>
-            <span
-              className='btn btn-info my-3'
-              onClick={() => {
-                history.goBack();
-              }}
-            >
-              Go Back
-            </span>
+            <GoBackButton history={history} />
             <Message>Cart is empty </Message>
           </>
         ) : (

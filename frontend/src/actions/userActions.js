@@ -22,13 +22,11 @@ import {
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
-  USER_DELETE_RESET,
 } from '../constants/userConstants';
 import {
   ORDER_DETAILS_RESET,
   ORDER_LIST_FOR_USER_RESET,
 } from '../constants/orderConstants';
-import { bindActionCreators } from 'redux';
 
 export const login = (email, password) => async (dispatch, getState) => {
   try {
@@ -195,9 +193,8 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
     const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-    // eslint-disable-next-line
-    const { data } = await axios.delete(`/api/users/${userId}`, config);
 
+    await axios.delete(`/api/users/${userId}`, config);
     dispatch({ type: USER_DELETE_SUCCESS });
   } catch (error) {
     dispatch({
