@@ -13,22 +13,18 @@ const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const {
-    userInfo: { isAdmin },
-  } = userLogin;
+  const { userInfo } = userLogin;
 
   const userList = useSelector((state) => state.userList);
   const { users, error, loading } = userList;
 
   useEffect(() => {
-    dispatch(listAllUsers());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (!isAdmin) {
-      history.push('/');
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listAllUsers());
+    } else {
+      history.push('/login');
     }
-  }, [history, isAdmin]);
+  }, [dispatch, userInfo, history]);
 
   const deleteHandler = (userId) => {
     console.log('deleted');
