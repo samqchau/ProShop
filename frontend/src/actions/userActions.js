@@ -19,11 +19,16 @@ import {
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
   USER_LIST_RESET,
+  USER_DELETE_FAIL,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_RESET,
 } from '../constants/userConstants';
 import {
   ORDER_DETAILS_RESET,
   ORDER_LIST_FOR_USER_RESET,
 } from '../constants/orderConstants';
+import { bindActionCreators } from 'redux';
 
 export const login = (email, password) => async (dispatch, getState) => {
   try {
@@ -175,6 +180,28 @@ export const listAllUsers = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
+    });
+  }
+};
+
+export const deleteUser = (userId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_DELETE_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+    // eslint-disable-next-line
+    const { data } = await axios.delete(`/api/users/${userId}`, config);
+
+    dispatch({ type: USER_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
