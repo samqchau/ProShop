@@ -5,6 +5,7 @@ import {
   registerUser,
   updateUserProfile,
   getAllUsers,
+  deleteUser,
 } from '../controllers/userController.js';
 import { protect, adminOnly } from '../middleware/authMiddleware.js';
 
@@ -15,5 +16,7 @@ userRouter.post('/', registerUser);
 userRouter.post('/login', authUser);
 userRouter.get('/profile', protect, getUserProfile);
 userRouter.put('/profile', protect, updateUserProfile);
+
+userRouter.delete('/:id', protect, adminOnly, deleteUser);
 
 export default userRouter;
