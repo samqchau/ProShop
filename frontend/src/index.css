@@ -11,3 +11,8 @@ h1 {
   font-size: 1.1rem;
   padding: 0.5rem 0rem;
 }
+
+.dropdown-item:hover {
+  background-color: black;
+  color: white;
+}
