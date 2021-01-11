@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-import { listProducts /*deleteProduct*/ } from '../actions/productActions';
+import { listProducts, deleteProduct } from '../actions/productActions';
 import { PRODUCT_DELETE_RESET } from '../constants/productConstants';
 
 const ProductListScreen = ({ history, match }) => {
@@ -18,13 +18,27 @@ const ProductListScreen = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    success,
+    error: productDeleteError,
+    loading: productDeleteLoading,
+    response,
+  } = productDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
     } else {
       history.push('/login');
     }
-  }, [userInfo, history, dispatch]);
+  }, [userInfo, history, dispatch, success]);
+
+  useEffect(() => {
+    return () => {
+      dispatch({ type: PRODUCT_DELETE_RESET });
+    };
+  }, [dispatch]);
 
   const createProductHandler = () => {
     //create product
@@ -32,7 +46,7 @@ const ProductListScreen = ({ history, match }) => {
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
-      //dispatch(deleteProduct(id))
+      dispatch(deleteProduct(id));
     }
   };
 
@@ -48,6 +62,13 @@ const ProductListScreen = ({ history, match }) => {
           </Button>
         </Col>
       </Row>
+      {productDeleteLoading && <Loader />}
+      {success && response && (
+        <Message variant='success'>{response.message}</Message>
+      )}
+      {productDeleteError && (
+        <Message variant='danger'>{productDeleteError}</Message>
+      )}
       {loading ? (
         <Loader />
       ) : error ? (

@@ -31,10 +31,13 @@ const UserListScreen = ({ history }) => {
     } else {
       history.push('/login');
     }
+  }, [dispatch, userInfo, history, userDeleteSuccess]);
+
+  useEffect(() => {
     return () => {
       dispatch({ type: USER_DELETE_RESET });
     };
-  }, [dispatch, userInfo, history, userDeleteSuccess]);
+  }, [dispatch]);
 
   const deleteHandler = (userId) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
