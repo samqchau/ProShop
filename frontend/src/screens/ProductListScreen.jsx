@@ -7,8 +7,15 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import GoBackButton from '../components/GoBackButton';
 
-import { listProducts, deleteProduct } from '../actions/productActions';
-import { PRODUCT_DELETE_RESET } from '../constants/productConstants';
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from '../actions/productActions';
+import {
+  PRODUCT_DELETE_RESET,
+  PRODUCT_CREATE_RESET,
+} from '../constants/productConstants';
 import removeActive from '../util/removeActive';
 
 const ProductListScreen = ({ history, match }) => {
@@ -28,6 +35,15 @@ const ProductListScreen = ({ history, match }) => {
     response,
   } = productDelete;
 
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: createProductLoading,
+    success: createProductSuccess,
+    error: createProductError,
+    product: createdProduct,
+    message: createProductMessage,
+  } = productCreate;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
@@ -35,6 +51,13 @@ const ProductListScreen = ({ history, match }) => {
       history.push('/login');
     }
   }, [userInfo, history, dispatch, success]);
+
+  useEffect(() => {
+    if (createProductSuccess) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
+      history.push(`/admin/product/${createdProduct._id}/edit`);
+    }
+  }, [createProductSuccess, history, createdProduct, dispatch]);
 
   useEffect(() => {
     return () => {
@@ -50,7 +73,7 @@ const ProductListScreen = ({ history, match }) => {
   }, []);
 
   const createProductHandler = () => {
-    //create product
+    dispatch(createProduct());
   };
 
   const deleteHandler = (id) => {
@@ -78,6 +101,14 @@ const ProductListScreen = ({ history, match }) => {
       {productDeleteError && (
         <Message variant='danger'>{productDeleteError}</Message>
       )}
+      {createProductLoading && <Loader />}
+      {createProductSuccess && createProductMessage && (
+        <Message variant='success'>{createProductMessage}</Message>
+      )}
+      {createProductError && (
+        <Message variant='danger'>{createProductError}</Message>
+      )}
+
       {loading ? (
         <Loader />
       ) : error ? (

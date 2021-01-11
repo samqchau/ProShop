@@ -54,7 +54,9 @@ export const createProduct = asyncHandler(async (req, res) => {
   });
 
   const createdProduct = await product.save();
-  res.status(201).json(createdProduct);
+  res
+    .status(201)
+    .json({ createdProduct, message: 'Product created successfully' });
 });
 
 //@desc Update a product
