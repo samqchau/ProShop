@@ -20,7 +20,7 @@ const ProductEditScreen = ({ history, match }) => {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
-  const [countInStock, setCountInStock] = useState(0);
+  const [numberInStock, setnumberInStock] = useState(0);
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -35,7 +35,7 @@ const ProductEditScreen = ({ history, match }) => {
       setBrand(product.brand);
       setCategory(product.category);
       setDescription(product.description);
-      setCountInStock(product.countInStock);
+      setnumberInStock(product.numberInStock);
     }
   }, [product, dispatch, productId]);
 
@@ -120,14 +120,14 @@ const ProductEditScreen = ({ history, match }) => {
                 }}
               />
             </Form.Group>
-            <Form.Group controlId='countInStock'>
+            <Form.Group controlId='numberInStock'>
               <Form.Label>Count In Stock</Form.Label>
               <Form.Control
                 placeholder='Enter Number in Stock'
                 type='number'
-                value={countInStock}
+                value={numberInStock}
                 onChange={(e) => {
-                  setCountInStock(e.target.value);
+                  setnumberInStock(e.target.value);
                 }}
               />
             </Form.Group>
