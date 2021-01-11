@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import GoBackButton from '../components/GoBackButton';
 
 import { listProducts, deleteProduct } from '../actions/productActions';
 import { PRODUCT_DELETE_RESET } from '../constants/productConstants';
+import removeActive from '../util/removeActive';
 
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -39,6 +41,13 @@ const ProductListScreen = ({ history, match }) => {
       dispatch({ type: PRODUCT_DELETE_RESET });
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    removeActive();
+    return () => {
+      removeActive();
+    };
+  }, []);
 
   const createProductHandler = () => {
     //create product
@@ -115,6 +124,7 @@ const ProductListScreen = ({ history, match }) => {
           </tbody>
         </Table>
       )}
+      <GoBackButton history={history} />
     </>
   );
 };

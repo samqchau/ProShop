@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import removeActive from '../util/removeActive';
 
 import {
   getUserDetails,
@@ -50,6 +51,13 @@ const ProfileScreen = ({ location, history }) => {
       }
     }
   }, [history, userInfo, user, dispatch]);
+
+  useEffect(() => {
+    removeActive();
+    return () => {
+      removeActive();
+    };
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();

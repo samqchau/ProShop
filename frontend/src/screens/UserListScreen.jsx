@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import GoBackButton from '../components/GoBackButton';
+import removeActive from '../util/removeActive';
 
 import { listAllUsers, deleteUser } from '../actions/userActions';
 import { USER_DELETE_RESET } from '../constants/userConstants';
@@ -38,6 +40,13 @@ const UserListScreen = ({ history }) => {
       dispatch({ type: USER_DELETE_RESET });
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    removeActive();
+    return () => {
+      removeActive();
+    };
+  }, []);
 
   const deleteHandler = (userId) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
@@ -114,6 +123,7 @@ const UserListScreen = ({ history }) => {
           </Table>
         </>
       )}
+      <GoBackButton history={history} />
     </>
   );
 };
