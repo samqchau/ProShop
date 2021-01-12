@@ -8,6 +8,8 @@ import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 //actions
 import { createOrder } from '../actions/orderActions';
+//util
+import addDecimals from '../util/addDecimals';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -16,9 +18,6 @@ const PlaceOrderScreen = ({ history }) => {
   const { order, success, error } = orderCreate;
 
   //calculate prices
-  const addDecimals = (num) => {
-    return (Math.round(num * 100) / 100).toFixed(2);
-  };
 
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -138,9 +137,11 @@ const PlaceOrderScreen = ({ history }) => {
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item>
-                {error && <Message variant='danger'>{error}</Message>}
-              </ListGroup.Item>
+              {error && (
+                <ListGroup.Item>
+                  <Message variant='danger'>{error}</Message>
+                </ListGroup.Item>
+              )}
               <ListGroup.Item>
                 <Button
                   block
