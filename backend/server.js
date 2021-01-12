@@ -1,19 +1,27 @@
+//Libraries
 import express from 'express';
 import dotenv from 'dotenv';
-import connectDB from './config/db.js';
 import colors from 'colors';
-import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import morgan from 'morgan';
 import path from 'path';
-
+//Middleware
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+//Routes
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
 import uploadRouter from './routes/uploadRoutes.js';
+//Database
+import connectDB from './config/db.js';
 
 dotenv.config();
 connectDB();
 
 const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 app.use(express.json());
 
