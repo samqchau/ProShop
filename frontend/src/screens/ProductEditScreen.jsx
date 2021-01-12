@@ -7,8 +7,8 @@ import Loader from '../components/Loader';
 import GoBackButton from '../components/GoBackButton';
 import FormContainer from '../components/FormContainer';
 
-import { listProductDetails } from '../actions/productActions';
-import {} from '../constants/productConstants';
+import { listProductDetails, updateProduct } from '../actions/productActions';
+import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 
 const ProductEditScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -25,22 +25,45 @@ const ProductEditScreen = ({ history, match }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: updateLoading,
+    error: updateError,
+    success: updateSuccess,
+  } = productUpdate;
+
   useEffect(() => {
-    if (!product.name || product._id !== productId) {
-      dispatch(listProductDetails(productId));
+    if (updateSuccess) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      history.push(`/product/${productId}`);
     } else {
-      setName(product.name);
-      setPrice(product.price);
-      setImage(product.image);
-      setBrand(product.brand);
-      setCategory(product.category);
-      setDescription(product.description);
-      setnumberInStock(product.numberInStock);
+      if (!product.name || product._id !== productId) {
+        dispatch(listProductDetails(productId));
+      } else {
+        setName(product.name);
+        setPrice(product.price);
+        setImage(product.image);
+        setBrand(product.brand);
+        setCategory(product.category);
+        setDescription(product.description);
+        setnumberInStock(product.numberInStock);
+      }
     }
-  }, [product, dispatch, productId]);
+  }, [product, dispatch, productId, history, updateSuccess]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const update = {
+      _id: productId,
+      name,
+      price,
+      brand,
+      category,
+      description,
+      image,
+      numberInStock,
+    };
+    dispatch(updateProduct(update));
   };
 
   return (
@@ -48,6 +71,8 @@ const ProductEditScreen = ({ history, match }) => {
       <GoBackButton history={history} />
       <FormContainer>
         <h1>Edit Product</h1>
+        {updateLoading && <Loader />}
+        {updateError && <Message variant='danger'>{updateError}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (

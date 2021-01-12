@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -10,6 +9,7 @@ import {
   Button,
   FormControl,
 } from 'react-bootstrap';
+import GoBackButton from '../components/GoBackButton';
 
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
@@ -34,9 +34,7 @@ const ProductScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/' className='btn btn-info my-3'>
-        Go Back
-      </Link>
+      <GoBackButton history={history} />
       {loading ? (
         <Loader />
       ) : error ? (
