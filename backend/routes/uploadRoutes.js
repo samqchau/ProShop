@@ -35,7 +35,8 @@ const upload = multer({
 });
 
 uploadRouter.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`);
+  const updatedFilePath = req.file.path.replace(/\\/g, '/');
+  res.send(`/${updatedFilePath}`);
 });
 
 export default uploadRouter;
