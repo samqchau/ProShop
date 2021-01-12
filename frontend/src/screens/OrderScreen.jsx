@@ -1,7 +1,7 @@
 //libraries
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 //components
@@ -9,16 +9,29 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { PayPalButton } from 'react-paypal-button-v2';
 //actions
-import { getOrderDetails, payOrder } from '../actions/orderActions';
-import { ORDER_PAY_RESET } from '../constants/orderConstants';
+import { getOrderDetails, payOrder, shipOrder } from '../actions/orderActions';
+import {
+  ORDER_PAY_RESET,
+  ORDER_SET_SHIPPING_RESET,
+} from '../constants/orderConstants';
 //util
 import addDecimals from '../util/addDecimals';
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const orderId = match.params.id;
 
   const [sdkReady, setSdkReady] = useState(false);
+  const [payPalLoadStart, setPayPalLoadStart] = useState(false);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const orderSetShipping = useSelector((state) => state.orderSetShipping);
+  const {
+    success: setShippingSuccess,
+    error: setShippingError,
+    loading: setShippingLoading,
+  } = orderSetShipping;
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -31,16 +44,20 @@ const OrderScreen = ({ match }) => {
   } = orderPay;
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
+  const setShippingHandler = () => {
+    dispatch(shipOrder(orderId));
+  };
+
   useEffect(() => {
-    if (!order || order._id !== orderId || successPay) {
+    if (!order || order._id !== orderId || successPay || setShippingSuccess) {
+      dispatch({ type: ORDER_SET_SHIPPING_RESET });
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, orderId, order, successPay]);
+  }, [dispatch, orderId, order, successPay, setShippingSuccess]);
 
   useEffect(() => {
     const addPayPalScript = async () => {
@@ -51,15 +68,34 @@ const OrderScreen = ({ match }) => {
       script.async = true;
       document.body.appendChild(script);
     };
-    if (!order.isPaid) {
+    if (!order.isPaid && !payPalLoadStart) {
+      setPayPalLoadStart(true);
       if (!window.paypal) {
         addPayPalScript();
         setSdkReady(true);
-      } else {
-        setSdkReady(true);
       }
     }
-  }, [order.isPaid]);
+  }, [order.isPaid, history, userInfo, sdkReady, payPalLoadStart]);
+
+  useEffect(() => {
+    return () => {
+      Object.keys(window).forEach((key) => {
+        if (/paypal|zoid|post_robot/.test(key)) {
+          delete window[key];
+        }
+      });
+
+      document
+        .querySelectorAll('script[src*="www.paypal.com/sdk"]')
+        .forEach((node) => node.remove());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
+  }, [history, userInfo]);
 
   return loading ? (
     <Loader />
@@ -89,7 +125,7 @@ const OrderScreen = ({ match }) => {
               </p>
               {order.isDelivered ? (
                 <Message variant='success'>
-                  Delivered at {order.deliveredAt}
+                  Sent for shipping on: {order.deliveredAt.substring(0, 10)}
                 </Message>
               ) : (
                 <Message variant='danger'>Not Delivered</Message>
@@ -102,7 +138,9 @@ const OrderScreen = ({ match }) => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant='success'>Paid on {order.paidAt}</Message>
+                <Message variant='success'>
+                  Paid on: {order.paidAt.substring(0, 10)}
+                </Message>
               ) : (
                 <Message variant='danger'>Not Paid</Message>
               )}
@@ -171,7 +209,7 @@ const OrderScreen = ({ match }) => {
                   <Col>${addDecimals(order.totalPrice)}</Col>
                 </Row>
               </ListGroup.Item>
-              {!order.isPaid && (
+              {!order.isPaid && sdkReady && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
                   {!sdkReady ? (
@@ -184,6 +222,24 @@ const OrderScreen = ({ match }) => {
                   )}
                 </ListGroup.Item>
               )}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    {setShippingLoading && <Loader />}
+                    {setShippingError && (
+                      <Message variant='danger'>{setShippingError}</Message>
+                    )}
+                    <Button
+                      variant='dark'
+                      className='btn btn-block'
+                      onClick={setShippingHandler}
+                    >
+                      Ship Order
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

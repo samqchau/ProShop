@@ -16,6 +16,9 @@ import {
   ORDER_LIST_FOR_ADMIN_REQUEST,
   ORDER_LIST_FOR_ADMIN_SUCCESS,
   ORDER_LIST_FOR_ADMIN_FAIL,
+  ORDER_SET_SHIPPING_REQUEST,
+  ORDER_SET_SHIPPING_SUCCESS,
+  ORDER_SET_SHIPPING_FAIL,
 } from '../constants/orderConstants';
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -140,7 +143,7 @@ export const listOrdersForUser = () => async (dispatch, getState) => {
   }
 };
 
-export const listOrdersForAdmin = async (dispatch, getState) => {
+export const listOrdersForAdmin = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_LIST_FOR_ADMIN_REQUEST });
     const {
@@ -153,9 +156,31 @@ export const listOrdersForAdmin = async (dispatch, getState) => {
     dispatch({
       type: ORDER_LIST_FOR_ADMIN_FAIL,
       payload:
-        error.message && error.message.data.response
-          ? error.message.data.response
-          : error.message,
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
+    });
+  }
+};
+
+export const shipOrder = (orderId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ORDER_SET_SHIPPING_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+
+    await axios.put(`/api/orders/${orderId}/shipping`, {}, config);
+    dispatch({ type: ORDER_SET_SHIPPING_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: ORDER_SET_SHIPPING_FAIL,
+      error:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response,
     });
   }
 };

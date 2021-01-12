@@ -13,6 +13,7 @@ import {
 } from '../actions/userActions';
 
 import { listOrdersForUser } from '../actions/orderActions';
+import { USER_DETAILS_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -56,8 +57,9 @@ const ProfileScreen = ({ location, history }) => {
     removeActive();
     return () => {
       removeActive();
+      dispatch({ type: USER_DETAILS_RESET });
     };
-  }, []);
+  }, [dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();

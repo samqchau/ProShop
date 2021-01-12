@@ -5,6 +5,7 @@ import {
   updateOrderToPaid,
   getMyOrders,
   getOrders,
+  updateOrderToShipping,
 } from '../controllers/orderController.js';
 import { adminOnly, protect } from '../middleware/authMiddleware.js';
 
@@ -16,5 +17,6 @@ orderRouter
 orderRouter.get('/myorders', protect, getMyOrders);
 orderRouter.get('/:id', protect, getOrderById);
 orderRouter.put('/:id/pay', protect, updateOrderToPaid);
+orderRouter.put('/:id/shipping', protect, adminOnly, updateOrderToShipping);
 
 export default orderRouter;

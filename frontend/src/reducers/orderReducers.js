@@ -19,6 +19,10 @@ import {
   ORDER_LIST_FOR_ADMIN_SUCCESS,
   ORDER_LIST_FOR_ADMIN_FAIL,
   ORDER_LIST_FOR_ADMIN_RESET,
+  ORDER_SET_SHIPPING_RESET,
+  ORDER_SET_SHIPPING_REQUEST,
+  ORDER_SET_SHIPPING_SUCCESS,
+  ORDER_SET_SHIPPING_FAIL,
 } from '../constants/orderConstants';
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -38,7 +42,11 @@ export const orderCreateReducer = (state = {}, action) => {
 
 export const orderDetailsReducer = (
   state = {
-    order: { shippingAddress: {}, orderItems: [], user: { name: '' } },
+    order: {
+      shippingAddress: {},
+      orderItems: [],
+      user: { name: '' },
+    },
   },
   action
 ) => {
@@ -98,6 +106,21 @@ export const orderListForAdminReducer = (state = { orders: [] }, action) => {
       return { loading: false, error: action.payload };
     case ORDER_LIST_FOR_ADMIN_RESET:
       return { orders: [] };
+    default:
+      return state;
+  }
+};
+
+export const orderSetShippingReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_SET_SHIPPING_REQUEST:
+      return { loading: true };
+    case ORDER_SET_SHIPPING_SUCCESS:
+      return { loading: false, success: true };
+    case ORDER_SET_SHIPPING_FAIL:
+      return { error: action.payload, loading: false };
+    case ORDER_SET_SHIPPING_RESET:
+      return {};
     default:
       return state;
   }
