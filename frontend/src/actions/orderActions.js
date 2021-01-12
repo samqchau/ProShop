@@ -13,6 +13,9 @@ import {
   ORDER_LIST_FOR_USER_REQUEST,
   ORDER_LIST_FOR_USER_SUCCESS,
   ORDER_LIST_FOR_USER_FAIL,
+  ORDER_LIST_FOR_ADMIN_REQUEST,
+  ORDER_LIST_FOR_ADMIN_SUCCESS,
+  ORDER_LIST_FOR_ADMIN_FAIL,
 } from '../constants/orderConstants';
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -133,6 +136,26 @@ export const listOrdersForUser = () => async (dispatch, getState) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.response,
+    });
+  }
+};
+
+export const listOrdersForAdmin = async (dispatch, getState) => {
+  try {
+    dispatch({ type: ORDER_LIST_FOR_ADMIN_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+    const { data } = await axios.get('/api/orders', config);
+    dispatch({ type: ORDER_LIST_FOR_ADMIN_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ORDER_LIST_FOR_ADMIN_FAIL,
+      payload:
+        error.message && error.message.data.response
+          ? error.message.data.response
+          : error.message,
     });
   }
 };

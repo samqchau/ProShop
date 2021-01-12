@@ -15,6 +15,10 @@ import {
   ORDER_LIST_FOR_USER_SUCCESS,
   ORDER_LIST_FOR_USER_FAIL,
   ORDER_LIST_FOR_USER_RESET,
+  ORDER_LIST_FOR_ADMIN_REQUEST,
+  ORDER_LIST_FOR_ADMIN_SUCCESS,
+  ORDER_LIST_FOR_ADMIN_FAIL,
+  ORDER_LIST_FOR_ADMIN_RESET,
 } from '../constants/orderConstants';
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -78,6 +82,21 @@ export const orderListForUserReducer = (state = { orders: [] }, action) => {
     case ORDER_LIST_FOR_USER_FAIL:
       return { loading: false, error: action.payload };
     case ORDER_LIST_FOR_USER_RESET:
+      return { orders: [] };
+    default:
+      return state;
+  }
+};
+
+export const orderListForAdminReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case ORDER_LIST_FOR_ADMIN_REQUEST:
+      return { loading: true };
+    case ORDER_LIST_FOR_ADMIN_SUCCESS:
+      return { loading: false, orders: action.payload, success: true };
+    case ORDER_LIST_FOR_ADMIN_FAIL:
+      return { loading: false, error: action.payload };
+    case ORDER_LIST_FOR_ADMIN_RESET:
       return { orders: [] };
     default:
       return state;
