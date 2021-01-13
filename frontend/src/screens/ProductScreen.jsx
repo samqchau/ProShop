@@ -167,77 +167,74 @@ const ProductScreen = ({ match, history }) => {
           <Row>
             <Col md={6}>
               <h2 className='my-3'>Customer Reviews</h2>
+              {!userInfo && (
+                <Message variant='info'>
+                  Please <Link to='/login'>login</Link> to leave a reivew
+                </Message>
+              )}
               {product.reviews.length === 0 && (
                 <Message variant='info'>No Reviews Currently</Message>
               )}
-              {userInfo && (
-                <ListGroup variant='flush'>
-                  <ListGroup.Item>
-                    {userInfo ? (
-                      <>
-                        <h3>Review our product</h3>
-                        {createdReviewError && (
-                          <Message variant='danger'>
-                            {createdReviewError}
-                          </Message>
-                        )}
-                        {createdReviewLoading && <Loader />}
-                        {createdReviewSuccess && (
-                          <Message variant='success'>
-                            {createdReviewMessage}
-                          </Message>
-                        )}
-                        <Form onSubmit={submitHandler}>
-                          <Form.Group controlId='rating'>
-                            <Form.Label>Rating</Form.Label>
-                            <Form.Control
-                              as='select'
-                              value={rating}
-                              onChange={(e) => {
-                                setRating(e.target.value);
-                              }}
-                              style={{ width: '130px' }}
-                            >
-                              <option value=''>Rating</option>
-                              <option value={1}>1</option>
-                              <option value={2}>2</option>
-                              <option value={3}>3</option>
-                              <option value={4}>4</option>
-                              <option value={5}>5</option>
-                            </Form.Control>
-                          </Form.Group>
-                          <Form.Group controlId='comment'>
-                            <Form.Label>Comment</Form.Label>
-                            <Form.Control
-                              as='textarea'
-                              rows='3'
-                              value={comment}
-                              onChange={(e) => {
-                                setComment(e.target.value);
-                              }}
-                            ></Form.Control>
-                          </Form.Group>
-                          <Button type='submit' variant='dark'>
-                            Submit
-                          </Button>
-                        </Form>
-                      </>
-                    ) : (
-                      <Message variant='info'>
-                        Please <Link to='/login'>login</Link> to leave a reivew
-                      </Message>
-                    )}
+              <ListGroup variant='flush'>
+                <ListGroup.Item>
+                  {userInfo && (
+                    <>
+                      <h3>Review our product</h3>
+                      {createdReviewError && (
+                        <Message variant='danger'>{createdReviewError}</Message>
+                      )}
+                      {createdReviewLoading && <Loader />}
+                      {createdReviewSuccess && (
+                        <Message variant='success'>
+                          {createdReviewMessage}
+                        </Message>
+                      )}
+                      <Form onSubmit={submitHandler}>
+                        <Form.Group controlId='rating'>
+                          <Form.Label>Rating</Form.Label>
+                          <Form.Control
+                            as='select'
+                            value={rating}
+                            onChange={(e) => {
+                              setRating(e.target.value);
+                            }}
+                            style={{ width: '130px' }}
+                          >
+                            <option value=''>Rating</option>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                          </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='comment'>
+                          <Form.Label>Comment</Form.Label>
+                          <Form.Control
+                            as='textarea'
+                            rows='3'
+                            value={comment}
+                            onChange={(e) => {
+                              setComment(e.target.value);
+                            }}
+                          ></Form.Control>
+                        </Form.Group>
+                        <Button type='submit' variant='dark'>
+                          Submit
+                        </Button>
+                      </Form>
+                    </>
+                  )}
+                </ListGroup.Item>
+                {product.reviews.map((review, index) => (
+                  <ListGroup.Item key={review._id}>
+                    <strong>{review.name}</strong>
+                    <Rating value={review.rating} />
+                    <span>{review.createdAt.substring(0, 10)}</span>
+                    <p>{review.comment}</p>
                   </ListGroup.Item>
-                  {product.reviews.map((review, index) => (
-                    <ListGroup.Item key={review._id}>
-                      <strong>{review.name}</strong>
-                      <Rating value={review.rating} />
-                      <span>{review.createdAt.substring(0, 10)}</span>
-                      <p>{review.comment}</p>
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              )}
+                ))}
+              </ListGroup>
             </Col>
           </Row>
         </>
