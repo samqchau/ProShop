@@ -167,9 +167,10 @@ const ProductScreen = ({ match, history }) => {
           <Row>
             <Col md={6}>
               <h2 className='my-3'>Customer Reviews</h2>
-              {product.reviews.length === 0 ? (
+              {product.reviews.length === 0 && (
                 <Message variant='info'>No Reviews Currently</Message>
-              ) : (
+              )}
+              {userInfo && (
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     {userInfo ? (
