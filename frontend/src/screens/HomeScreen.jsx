@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { listProducts } from '../actions/productActions.js';
 
+import Meta from '../components/Meta';
 import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -24,6 +26,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
+      <Meta />
       {!keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
       {loading ? (
