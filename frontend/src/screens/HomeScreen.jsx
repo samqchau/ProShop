@@ -10,8 +10,9 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
+import GoBackButton from '../components/GoBackButton.jsx';
 
-const HomeScreen = ({ match }) => {
+const HomeScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const keyword = match.params.keyword;
@@ -27,7 +28,7 @@ const HomeScreen = ({ match }) => {
   return (
     <>
       <Meta />
-      {!keyword && <ProductCarousel />}
+      {!keyword ? <ProductCarousel /> : <GoBackButton history={history} />}
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />
