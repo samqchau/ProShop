@@ -13,6 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import GoBackButton from '../components/GoBackButton';
 
+import Meta from '../components/Meta';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -81,6 +82,7 @@ const ProductScreen = ({ match, history }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+          <Meta title={`ProShop | ${product.name}`} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />
