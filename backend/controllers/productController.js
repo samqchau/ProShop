@@ -5,7 +5,7 @@ import asyncHandler from 'express-async-handler';
 //@route GET /api/products
 //@access Public
 export const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 3;
+  const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
@@ -139,4 +139,12 @@ export const createProductReview = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('Product not found');
   }
+});
+
+//desc Gets top rated products
+//route '/api/products/top
+//public
+export const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(4);
+  res.json(products);
 });
