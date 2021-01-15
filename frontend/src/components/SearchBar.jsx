@@ -23,7 +23,7 @@ const SearchBar = ({ history }) => {
           setKeyword(e.target.value);
         }}
         placeholder='Search Products'
-        className=' ml-sm-5'
+        className=''
       />
       <Button size='sm' type='submit' variant='outline-light' className='p-2'>
         Search
