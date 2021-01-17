@@ -32,7 +32,7 @@ const HomeScreen = ({ match, history }) => {
       <Container className='homeScreenProductContainer py-3'>
         <h1 className='text-center'>Latest Products</h1>
         {loading ? (
-          <Loader />
+          <Loader ypos='60%' />
         ) : error ? (
           <Message variant='danger'>{error}</Message>
         ) : (

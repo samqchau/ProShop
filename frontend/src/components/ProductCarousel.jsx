@@ -17,7 +17,7 @@ const ProductCarousel = () => {
     dispatch(listTopProducts());
   }, [dispatch]);
   return loading ? (
-    <Loader />
+    <Loader ypos='30%' />
   ) : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (

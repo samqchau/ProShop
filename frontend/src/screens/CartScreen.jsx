@@ -11,7 +11,6 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import Center from '../components/Center';
 import Message from '../components/Message';
 import GoBackButton from '../components/GoBackButton';
 import { addToCart, removeFromCart } from '../actions/cartActions';
@@ -97,7 +96,7 @@ const CartScreen = ({ match, location, history }) => {
         )}
       </Col>
       <Col md={4}>
-        <h1>Order Summary</h1>
+        <h1>Cart Summary</h1>
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>
