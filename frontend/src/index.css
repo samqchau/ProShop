@@ -193,3 +193,15 @@ form {
 .scrollTopButton:hover {
   color: #ad81bb;
 }
+
+.navbar-toggler-icon {
+  display: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+.navbar-toggler {
+  font-size: 1.6rem;
+}

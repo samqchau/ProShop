@@ -25,7 +25,11 @@ const Header = () => {
           <LinkContainer to='/'>
             <Navbar.Brand>ProShop</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
+          <Navbar.Toggle
+            className='fas fa-caret-square-down fa-2x'
+            style={{ color: 'white' }}
+            aria-controls='basic-navbar-nav'
+          />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ml-auto'>
               <Route
