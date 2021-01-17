@@ -4,29 +4,29 @@ import { Container } from 'react-bootstrap';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollTopButton from './components/ScrollTopButton';
 
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
+import HomeScreen from './screens/HomeScreen';
 import LogInScreen from './screens/LogInScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import ShippingScreen from './screens/ShippingScreen';
+import OrderScreen from './screens/OrderScreen';
+import OrderListScreen from './screens/OrderListScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import OrderScreen from './screens/OrderScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ProductScreen from './screens/ProductScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import ShippingScreen from './screens/ShippingScreen';
+import TestScreen from './screens/TestScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
-import ProductListScreen from './screens/ProductListScreen';
-import OrderListScreen from './screens/OrderListScreen';
-
-import TestScreen from './screens/TestScreen';
-import ProductEditScreen from './screens/ProductEditScreen';
 
 const App = () => {
   return (
     <Router>
-      <Header />
+      <Header id='top' />
       <main className='py-1 mainScreen'>
         <Container>
           <Route path='/login' component={LogInScreen} />
@@ -61,6 +61,7 @@ const App = () => {
           />
           <Route path='/' component={HomeScreen} exact />
         </Container>
+        <ScrollTopButton />
       </main>
       <Footer />
     </Router>

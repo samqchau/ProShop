@@ -185,3 +185,17 @@ form {
 .list-group-item .row {
   align-items: center;
 }
+
+.scrollTopButton {
+  position: fixed;
+  left: 93.5%;
+  top: 90%;
+  height: 2rem;
+  width: 3rem;
+  color: rgba(255, 255, 255, 0.2);
+  transition: 0.5s;
+}
+
+.scrollTopButton:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
