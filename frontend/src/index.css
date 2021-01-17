@@ -119,13 +119,6 @@ a.active.dropdown-item:active {
   );
 }
 
-.homeScreenProductContainer {
-  border-right: 1px solid white;
-  border-bottom: 1px solid white;
-  border-left: 1px solid white;
-  border-radius: 0px 0px 4px 4px;
-}
-
 .card {
   border: 3px solid black;
 }
@@ -192,10 +185,11 @@ form {
   top: 90%;
   height: 2rem;
   width: 3rem;
-  color: rgba(255, 255, 255, 0.2);
+  color: #ad81bb80;
   transition: 0.5s;
+  z-index: 999;
 }
 
 .scrollTopButton:hover {
-  color: rgba(255, 255, 255, 0.5);
+  color: #ad81bb;
 }

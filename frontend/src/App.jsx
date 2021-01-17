@@ -28,6 +28,7 @@ const App = () => {
     <Router>
       <Header id='top' />
       <main className='py-1 mainScreen'>
+        <ScrollTopButton />
         <Container>
           <Route path='/login' component={LogInScreen} />
           <Route path='/register' component={RegisterScreen} />
@@ -61,7 +62,6 @@ const App = () => {
           />
           <Route path='/' component={HomeScreen} exact />
         </Container>
-        <ScrollTopButton />
       </main>
       <Footer />
     </Router>

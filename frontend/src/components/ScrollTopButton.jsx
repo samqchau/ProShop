@@ -27,7 +27,7 @@ const ScrollTopButton = () => {
 
   return (
     <i
-      className='far fa-arrow-alt-circle-up fa-3x scrollTopButton'
+      className='fas fa-chevron-circle-up fa-3x scrollTopButton'
       style={{ opacity: `${displayed ? '1' : '0'}` }}
       onClick={scrollTop}
       onScroll={handleScroll}
