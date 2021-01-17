@@ -82,11 +82,11 @@ const ProductScreen = ({ match, history }) => {
       ) : (
         <>
           <Meta title={`ProShop | ${product.name}`} />
-          <Row>
-            <Col md={6}>
+          <Row sm={1} md={1}>
+            <Col md={4}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
-            <Col md={3}>
+            <Col md={3} style={{ minWidth: '250px' }}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
