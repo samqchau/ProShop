@@ -78,19 +78,17 @@ const CartScreen = ({ match, location, history }) => {
                       ))}
                     </FormControl>
                   </Col>
-                  <Col md={1}>
-                    <Center>
-                      <Button
-                        className='btn-sm'
-                        type='button'
-                        variant='dark'
-                        onClick={(e) => {
-                          removeFromCartHandler(item.product);
-                        }}
-                      >
-                        <i className='fas fa-trash' />
-                      </Button>
-                    </Center>
+                  <Col md={1} className='mx-4'>
+                    <Button
+                      className='btn-sm'
+                      type='button'
+                      variant='dark'
+                      onClick={(e) => {
+                        removeFromCartHandler(item.product);
+                      }}
+                    >
+                      <i className='fas fa-trash' />
+                    </Button>
                   </Col>
                 </Row>
               </ListGroup.Item>
