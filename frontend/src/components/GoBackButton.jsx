@@ -3,7 +3,7 @@ import React from 'react';
 const GoBackButton = ({ history }) => {
   return (
     <div
-      className='btn btn-info my-3'
+      className='btn btn-primary my-3'
       onClick={() => {
         history.goBack();
       }}

@@ -1,10 +1,36 @@
+html,
+body {
+  box-sizing: border-box;
+}
+
 main {
   min-height: 80vh;
 }
 
+body {
+  background: -webkit-linear-gradient(
+    0.25turn,
+    #0f2027,
+    #203a43,
+    #0e3c50,
+    #203a43,
+    #0f2027
+  );
+  background: linear-gradient(
+    0.25turn,
+    #0f2027,
+    #203a43,
+    #0e3c50,
+    #203a43,
+    #0f2027
+  );
+  color: white;
+}
+
 h1 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   padding: 0.1rem;
+  color: white;
 }
 
 .myh2 {
@@ -17,10 +43,30 @@ h1 {
   color: white;
 }
 
+a.active.dropdown-item:active {
+  background-color: white;
+}
+
 .carousel {
   background: #0f2027;
-  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
-  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: -webkit-linear-gradient(
+    to right,
+    #0f2027,
+    #203a43,
+    #0e3c50,
+    #203a43,
+    #0f2027
+  );
+  background: linear-gradient(
+    to right,
+    #0f2027,
+    #203a43,
+    #0e3c50,
+    #203a43,
+    #0f2027
+  );
+  border: 1px solid white;
+  border-radius: 5px 5px 0px 0px;
 }
 
 .carousel-item-next,
@@ -43,7 +89,7 @@ h1 {
   height: 300px;
   padding: 20px;
   margin: 40px;
-  border-radius: 70%;
+  border-radius: 50%;
 }
 
 .carousel a {
@@ -54,4 +100,88 @@ h1 {
 .navbar {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  background: #0f2027;
+  background: -webkit-linear-gradient(
+    to right,
+    #0f2027,
+    #203a43,
+    #0e3c50,
+    #203a43,
+    #0f2027
+  );
+  background: linear-gradient(
+    to right,
+    #0f2027,
+    #203a43,
+    #0e3c50,
+    #203a43,
+    #0f2027
+  );
+}
+
+.homeScreenProductContainer {
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.card {
+  border: 3px solid black;
+}
+
+.list-group {
+  border: 3px solid black;
+}
+
+.list-group .card,
+.card .list-group,
+.list-group-item .list-group {
+  border: none;
+}
+
+.table,
+.table-hover,
+tbody,
+tr:hover,
+a,
+td,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+a:hover {
+  color: white;
+}
+
+form {
+  margin-bottom: 5px;
+}
+
+.list-group {
+  color: black;
+}
+
+.card a,
+.card a:hover,
+.card-text,
+.list-group-item a {
+  color: black;
+}
+
+::selection {
+  background-color: rgb(170, 129, 209);
+  color: white;
+}
+
+.list-group-item .row {
+  align-items: center;
 }

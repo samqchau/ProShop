@@ -139,7 +139,7 @@ const ProductListScreen = ({ history, match }) => {
                   <td>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                        <Button variant='dark' className='btn-sm'>
+                        <Button variant='primary' className='btn-sm'>
                           <i className='fas fa-edit' />
                         </Button>
                       </LinkContainer>

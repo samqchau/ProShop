@@ -106,7 +106,7 @@ const UserEditScreen = ({ match, history }) => {
                 onChange={isAdminChangeHandler}
               />{' '}
             </Form.Group>
-            <Button type='submit' variant='dark'>
+            <Button type='submit' variant='primary'>
               Update
             </Button>
           </Form>

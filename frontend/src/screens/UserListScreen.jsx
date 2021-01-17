@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Center from '../components/Center';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import GoBackButton from '../components/GoBackButton';
@@ -88,7 +89,7 @@ const UserListScreen = ({ history }) => {
                     <a href={`mailto:${user.email}`}>{user.email}</a>
                   </td>
                   <td>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Center>
                       {user.isAdmin ? (
                         <i
                           className='fas fa-check'
@@ -97,12 +98,12 @@ const UserListScreen = ({ history }) => {
                       ) : (
                         <i className='fas fa-times' style={{ color: 'red' }} />
                       )}
-                    </div>
+                    </Center>
                   </td>
                   <td>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                        <Button variant='dark' className='btn-sm'>
+                        <Button variant='primary' className='btn-sm'>
                           <i className='fas fa-edit' />
                         </Button>
                       </LinkContainer>

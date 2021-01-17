@@ -100,7 +100,7 @@ const RegisterScreen = ({ location, history }) => {
             onChange={confirmPasswordHandler}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' variant='dark'>
+        <Button type='submit' variant='primary'>
           Register
         </Button>
       </Form>

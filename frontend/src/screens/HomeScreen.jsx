@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { listProducts } from '../actions/productActions.js';
@@ -29,27 +29,29 @@ const HomeScreen = ({ match, history }) => {
     <>
       <Meta />
       {!keyword ? <ProductCarousel /> : <GoBackButton history={history} />}
-      <h1>Latest Products</h1>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
-        <>
-          <Row>
-            {products.map((product) => (
-              <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
-                <Product product={product} />
-              </Col>
-            ))}
-          </Row>
-          <Paginate
-            page={page}
-            pages={pages}
-            keyword={keyword ? keyword : ''}
-          />
-        </>
-      )}
+      <Container className='homeScreenProductContainer py-3'>
+        <h1 className='text-center'>Latest Products</h1>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant='danger'>{error}</Message>
+        ) : (
+          <>
+            <Row>
+              {products.map((product) => (
+                <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+                  <Product product={product} />
+                </Col>
+              ))}
+            </Row>
+            <Paginate
+              page={page}
+              pages={pages}
+              keyword={keyword ? keyword : ''}
+            />
+          </>
+        )}
+      </Container>
     </>
   );
 };

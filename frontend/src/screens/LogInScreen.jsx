@@ -60,7 +60,7 @@ const LogInScreen = ({ location, history }) => {
             onChange={passwordChangeHandler}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' variant='dark'>
+        <Button type='submit' variant='primary'>
           Sign In
         </Button>
       </Form>

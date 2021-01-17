@@ -141,7 +141,7 @@ const ProfileScreen = ({ location, history }) => {
               onChange={confirmPasswordHandler}
             ></Form.Control>
           </Form.Group>
-          <Button type='submit' variant='dark'>
+          <Button type='submit' variant='primary'>
             Update
           </Button>
         </Form>
@@ -191,7 +191,7 @@ const ProfileScreen = ({ location, history }) => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button className='btn-sm' variant='dark'>
+                      <Button className='btn-sm' variant='primary'>
                         Details
                       </Button>
                     </LinkContainer>

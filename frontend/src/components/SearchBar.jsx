@@ -24,6 +24,7 @@ const SearchBar = ({ history }) => {
         }}
         placeholder='Search Products'
         className=''
+        style={{ height: '2.19rem' }}
       />
       <Button size='sm' type='submit' variant='outline-light' className='p-2'>
         Search

@@ -221,7 +221,7 @@ const ProductScreen = ({ match, history }) => {
                             }}
                           ></Form.Control>
                         </Form.Group>
-                        <Button type='submit' variant='dark'>
+                        <Button type='submit' variant='primary'>
                           Submit
                         </Button>
                       </Form>

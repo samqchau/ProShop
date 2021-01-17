@@ -222,7 +222,7 @@ const OrderScreen = ({ match, history }) => {
                       <Message variant='danger'>{setShippingError}</Message>
                     )}
                     <Button
-                      variant='dark'
+                      variant='primary'
                       className='btn btn-block'
                       onClick={setShippingHandler}
                     >

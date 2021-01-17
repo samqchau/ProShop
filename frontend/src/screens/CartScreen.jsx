@@ -9,10 +9,11 @@ import {
   Card,
   FormControl,
 } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
+import Center from '../components/Center';
 import Message from '../components/Message';
 import GoBackButton from '../components/GoBackButton';
-import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ match, location, history }) => {
@@ -55,7 +56,7 @@ const CartScreen = ({ match, location, history }) => {
                   <Col md={2}>
                     <Image src={item.image} fluid rounded alt={item.name} />
                   </Col>
-                  <Col md={3}>
+                  <Col md={4}>
                     <Link to={`/products/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>Price: ${item.price}</Col>
@@ -77,16 +78,19 @@ const CartScreen = ({ match, location, history }) => {
                       ))}
                     </FormControl>
                   </Col>
-                  <Col>
-                    <Button
-                      type='button'
-                      variant='light'
-                      onClick={(e) => {
-                        removeFromCartHandler(item.product);
-                      }}
-                    >
-                      <i className='fas fa-trash' />
-                    </Button>
+                  <Col md={1}>
+                    <Center>
+                      <Button
+                        className='btn-sm'
+                        type='button'
+                        variant='dark'
+                        onClick={(e) => {
+                          removeFromCartHandler(item.product);
+                        }}
+                      >
+                        <i className='fas fa-trash' />
+                      </Button>
+                    </Center>
                   </Col>
                 </Row>
               </ListGroup.Item>
@@ -95,6 +99,7 @@ const CartScreen = ({ match, location, history }) => {
         )}
       </Col>
       <Col md={4}>
+        <h1>Order Summary</h1>
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>
