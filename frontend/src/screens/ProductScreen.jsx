@@ -75,7 +75,6 @@ const ProductScreen = ({ match, history }) => {
 
   return (
     <>
-      <GoBackButton history={history} />
       {loading ? (
         <Loader />
       ) : error ? (
@@ -164,6 +163,7 @@ const ProductScreen = ({ match, history }) => {
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
+              <GoBackButton history={history} />
             </Col>
           </Row>
           <Row>
