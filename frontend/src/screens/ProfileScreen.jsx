@@ -21,6 +21,7 @@ const ProfileScreen = ({ location, history }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
+  const [gotUserInfo, setGotUserInfo] = useState(false);
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
@@ -43,15 +44,16 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
-      if (!user.name) {
+      if (!gotUserInfo) {
         dispatch(getUserDetails('profile'));
         dispatch(listOrdersForUser());
+        setGotUserInfo(true);
       } else {
         setName(userInfo.name);
         setEmail(user.email);
       }
     }
-  }, [history, userInfo, user, dispatch]);
+  }, [history, userInfo, user, dispatch, gotUserInfo]);
 
   useEffect(() => {
     removeActive();
