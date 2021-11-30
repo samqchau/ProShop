@@ -16,6 +16,7 @@ const SearchBar = ({ history }) => {
   return (
     <Form onSubmit={submitHandler} inline>
       <Form.Control
+        autoComplete='off'
         size='sm'
         type='text'
         name='q'

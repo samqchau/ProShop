@@ -111,6 +111,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
+              autoComplete='off'
               placeholder='Enter name'
               value={name}
               onChange={nameChangeHandler}
@@ -119,6 +120,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='email'>
             <Form.Label>Email Address</Form.Label>
             <Form.Control
+              autoComplete='off'
               type='email'
               placeholder='Enter email'
               value={email}
@@ -128,6 +130,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='password'>
             <Form.Label>Password</Form.Label>
             <Form.Control
+              autoComplete='off'
               type='password'
               value={password}
               onChange={passwordChangeHandler}
@@ -137,6 +140,7 @@ const ProfileScreen = ({ location, history }) => {
           <Form.Group controlId='confirmPassword'>
             <Form.Label>Re-enter Password</Form.Label>
             <Form.Control
+              autoComplete='off'
               type='password'
               placeholder='Confirm password'
               value={confirmPassword}

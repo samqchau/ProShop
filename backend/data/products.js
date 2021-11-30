@@ -1,5 +1,17 @@
 const products = [
   {
+    name: 'Amazon Echo Dot 3rd Generation',
+    image: '/images/alexa.jpg',
+    description:
+      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
+    brand: 'Amazon',
+    category: 'Electronics',
+    price: 29.99,
+    numberInStock: 9,
+    rating: 4,
+    numReviews: 12,
+  },
+  {
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
     description:
@@ -58,18 +70,6 @@ const products = [
     numberInStock: 7,
     rating: 3.5,
     numReviews: 10,
-  },
-  {
-    name: 'Amazon Echo Dot 3rd Generation',
-    image: '/images/alexa.jpg',
-    description:
-      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
-    brand: 'Amazon',
-    category: 'Electronics',
-    price: 29.99,
-    numberInStock: 0,
-    rating: 4,
-    numReviews: 12,
   },
 ];
 

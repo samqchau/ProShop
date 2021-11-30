@@ -177,9 +177,9 @@ const ProductScreen = ({ match, history }) => {
               {product.reviews.length === 0 && (
                 <Message variant='info'>No Reviews Currently</Message>
               )}
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  {userInfo && (
+              {userInfo && (
+                <ListGroup variant='flush'>
+                  <ListGroup.Item>
                     <>
                       <h3>Review our product</h3>
                       {createdReviewError && (
@@ -195,6 +195,7 @@ const ProductScreen = ({ match, history }) => {
                         <Form.Group controlId='rating'>
                           <Form.Label>Rating</Form.Label>
                           <Form.Control
+                            autoComplete='off'
                             as='select'
                             value={rating}
                             onChange={(e) => {
@@ -213,6 +214,7 @@ const ProductScreen = ({ match, history }) => {
                         <Form.Group controlId='comment'>
                           <Form.Label>Comment</Form.Label>
                           <Form.Control
+                            autoComplete='off'
                             as='textarea'
                             rows='3'
                             value={comment}
@@ -226,17 +228,22 @@ const ProductScreen = ({ match, history }) => {
                         </Button>
                       </Form>
                     </>
-                  )}
-                </ListGroup.Item>
-                {product.reviews.map((review, index) => (
-                  <ListGroup.Item key={review._id}>
-                    <strong>{review.name}</strong>
-                    <Rating value={review.rating} />
-                    <span>{review.createdAt.substring(0, 10)}</span>
-                    <p>{review.comment}</p>
                   </ListGroup.Item>
-                ))}
-              </ListGroup>
+                </ListGroup>
+              )}
+
+              {product.reviews.length > 0 && (
+                <ListGroup>
+                  {product.reviews.map((review, index) => (
+                    <ListGroup.Item key={review._id}>
+                      <strong>{review.name}</strong>
+                      <Rating value={review.rating} />
+                      <span>{review.createdAt.substring(0, 10)}</span>
+                      <p>{review.comment}</p>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              )}
             </Col>
           </Row>
         </>

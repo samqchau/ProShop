@@ -45,6 +45,7 @@ const LogInScreen = ({ location, history }) => {
         <Form.Group controlId='email'>
           <Form.Label>Email Address </Form.Label>
           <Form.Control
+            autoComplete='off'
             type='email'
             placeholder='Enter email'
             value={email}
@@ -54,6 +55,7 @@ const LogInScreen = ({ location, history }) => {
         <Form.Group controlId='password'>
           <Form.Label>Password </Form.Label>
           <Form.Control
+            autoComplete='off'
             type='password'
             placeholder='Enter password'
             value={password}

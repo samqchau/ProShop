@@ -105,6 +105,7 @@ const ProductEditScreen = ({ history, match }) => {
             <Form.Group controlId='name'>
               <Form.Label>Name</Form.Label>
               <Form.Control
+                autoComplete='off'
                 type='name'
                 placeholder='Enter Product Name'
                 value={name}
@@ -116,6 +117,7 @@ const ProductEditScreen = ({ history, match }) => {
             <Form.Group controlId='price'>
               <Form.Label>Price</Form.Label>
               <Form.Control
+                autoComplete='off'
                 placeholder='0'
                 type='number'
                 value={price}
@@ -127,6 +129,7 @@ const ProductEditScreen = ({ history, match }) => {
             <Form.Group controlId='brand'>
               <Form.Label>Brand</Form.Label>
               <Form.Control
+                autoComplete='off'
                 placeholder='Enter Product Brand'
                 type='name'
                 value={brand}
@@ -138,6 +141,7 @@ const ProductEditScreen = ({ history, match }) => {
             <Form.Group controlId='category'>
               <Form.Label>Category</Form.Label>
               <Form.Control
+                autoComplete='off'
                 placeholder='Enter Product Category'
                 type='name'
                 value={category}
@@ -149,6 +153,7 @@ const ProductEditScreen = ({ history, match }) => {
             <Form.Group controlId='description'>
               <Form.Label>Description</Form.Label>
               <Form.Control
+                autoComplete='off'
                 placeholder='Enter Product Description'
                 type='name'
                 value={description}
@@ -160,6 +165,7 @@ const ProductEditScreen = ({ history, match }) => {
             <Form.Group controlId='image'>
               <Form.Label>Image</Form.Label>
               <Form.Control
+                autoComplete='off'
                 type='text'
                 placeholder='Enter image url'
                 value={image}
@@ -178,6 +184,7 @@ const ProductEditScreen = ({ history, match }) => {
             <Form.Group controlId='numberInStock'>
               <Form.Label>Count In Stock</Form.Label>
               <Form.Control
+                autoComplete='off'
                 placeholder='Enter Number in Stock'
                 type='number'
                 value={numberInStock}

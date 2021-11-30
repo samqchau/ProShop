@@ -39,6 +39,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='address'>
           <Form.Label>Address</Form.Label>
           <Form.Control
+            autoComplete='off'
             placeholder='Enter address'
             value={address}
             required
@@ -50,6 +51,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='city'>
           <Form.Label>City</Form.Label>
           <Form.Control
+            autoComplete='off'
             placeholder='Enter city'
             value={city}
             required
@@ -61,6 +63,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='postalCode'>
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
+            autoComplete='off'
             placeholder='Enter Postal Code'
             value={postalCode}
             required
@@ -72,6 +75,7 @@ const ShippingScreen = ({ history }) => {
         <Form.Group controlId='country'>
           <Form.Label>Country</Form.Label>
           <Form.Control
+            autoComplete='off'
             placeholder='Enter Postal Code'
             value={country}
             required

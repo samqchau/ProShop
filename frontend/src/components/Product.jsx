@@ -19,8 +19,14 @@ const Product = ({ product }) => {
 
         <Card.Text as='div'>
           <Rating
-            value={product.rating}
-            text={`${product.numReviews} reviews`}
+            value={Math.ceil(
+              product.reviews.reduce((acc, r) => {
+                return acc + r.rating;
+              }, 0) / product.reviews.length
+            )}
+            text={`${product.reviews.length} review${
+              product.reviews.length !== 1 ? 's' : ''
+            }`}
           />
         </Card.Text>
 
