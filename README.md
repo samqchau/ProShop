@@ -50,23 +50,43 @@
 
 #### Database Schemas
 
-| Table        | Column         |  Data Type  |       Default       |      Constraints      |
-| ------------ | -------------- | :---------: | :-----------------: | :-------------------: |
-| Users        | id             |   VARCHAR   |                     | PRIMARY KEY, NOT NULL |
-|              | email          |   CITEXT    |                     |   NOT NULL, UNIQUE    |
-| Applications | id             |    uuid     | uuid_generate_v4( ) | PRIMARY KEY, NOT NULL |
-|              | user_id        |   VARCHAR   |         ---         | NOT NULL, FOREIGN KEY |
-|              | company_name   | VARCHAR(20) |         ---         |       NOT NULL        |
-|              | date_applied   |  timestamp  |  CURRENT_TIMESTAMP  |                       |
-|              | last_updated   |  timestamp  |  CURRENT_TIMESTAMP  |                       |
-|              | index          |   integer   |         ---         |       NOT NULL        |
-|              | fav_index      |   integer   |         ---         |       NOT NULL        |
-|              | color          |   VARCHAR   |       'white'       |                       |
-| Notes        | id             |    uuid     | uuid_generate_v4( ) | PRIMARY KEY, NOT_NULL |
-|              | application_id |    uuid     |                     | NOT NULL, FOREIGN KEY |
-|              | created_on     |  timestamp  |  CURRENT_TIMESTAMP  |       NOT NULL        |
-|              | last_updated   |  timestamp  |  CURRENT_TIMESTAMP  |                       |
-|              | content        |    text     |                     |       NOT NULL        |
+| Table        | Column         |  Data Type  |
+| ------------ | -------------- | :---------: |
+| Users        | id             |   Object Id |
+|              | isAdmin        |   Boolean   |
+|              | name           |   String    |
+|              | email          |   String    |
+|              | password       |   String    |
+|              | created_at     |   Timestamp |
+|              | updated_at     |   Timestamp |
+| Products     | id             |   Object Id |
+|              | User           |   Object Id |
+|              | name           |   String    |
+|              | image          |   String    |
+|              | brand          |   String    |
+|              | category       |   String    |
+|              | description    |   String    |
+|              | reviews        |[ Object Id ]|
+|              | price          |   Number    |
+|              | number_in_stock|   Number    |
+| Reviews      | name           |   String    |
+|              | rating         |   Number    |
+|              | comment        |   String    |
+|              | User           |   Object Id |
+| Orders       | id             |   Object Id |
+|              | User           |   Object Id |
+|              | order_total    |   Number    |
+|              | tax_price      |   Number    |
+|              | shipping_price |   Number    |
+|              | total_price    |   Number    |
+|              | is_paid        |   Boolean   |
+|              | is_delivered   |   Boolean   |
+|              | order_items    | { Product,<br> quantity: Number } |
+|              |shipping_address| { address: String,<br> city: String,<br> postal_code: String,<br> country: String } |
+|              | payment_method |   String    |
+|              | payment_result | { id: Object Id, <br> status: String, <br> update_time: timestamp, <br> email: String } |
+|              | delivered_at   |  Timestamp  |
+|              |    paid_at     |  Timestamp  |
 
 </div>
 
