@@ -88,11 +88,8 @@
 |              | delivered_at   |  Timestamp  |
 |              |    paid_at     |  Timestamp  |
 
+#### Limited And Protected Resources
+
 </div>
 
-<div align="center">
-
-#### Protected Routes
-
-</div> 
-   In version 2, Google Firebase is used for authentication. When the client authenticates through Firebase, Firebase returns a lot of information about the user. In this use case, only a user id and email are passed to the server to store in the Postgres database. The user id is salted and used to generate a token (JWT) that is passed back to the user. Every request users make is validated by Express middleware. The middleware recieves the token and decodes it. If the token is valid, the the next middleware in the proper request cycle is called, otherwise the user recieves an error message.
+Users register with a name, email, and password. Passwords are salted and encrypted using bcrypt before being saved in the Mongo Atlas database. When users login, login data is compared and on success, a token is generated and sent to the user. On every proceeding request, the user sends the token, and the requests are validated by middleware. The middleware decodes the token and the user's authorization roles are fetched allowing them to access (role) protected routes.
