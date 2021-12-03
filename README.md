@@ -4,6 +4,9 @@
 
 ## Table of Contents
 
+**[Core Features](https://github.com/samqchau/ProShop/blob/master/README.md#core-features)** |
+**[API Design](https://github.com/samqchau/ProShop/blob/master/README.md#api-design)** | **[Database Schemas](https://github.com/samqchau/ProShop/blob/master/README.md#database-schemas)** | **[Limited and Protected Resources](https://github.com/samqchau/ProShop/blob/master/README.md#limited-and-protected-resources)** |
+    
 </div>
 
 <div align="center">
